@@ -2,8 +2,12 @@ package main
 
 import "fmt"
 
-func commandMap(c *Config) error {
-    res, err := c.Client.GetLocationAreas(c.Next)
+func commandMapb(c *Config) error {
+    if c.Previous == nil {
+            fmt.Println("you're on the first page")
+            return nil
+    }
+    res, err := c.Client.GetLocationAreas(c.Previous)
         if err != nil {
             return err
         }

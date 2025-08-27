@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func commandHelp() error {
+func commandHelp(c *Config) error {
     fmt.Println("Welcome to the Pokedex!")
     fmt.Println("Usage:")
     for name, cmd := range commands {

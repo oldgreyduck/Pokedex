@@ -7,21 +7,21 @@ import (
 	"time"
 )
 
-type pokeapiClient struct {
+type PokeApiClient struct {
 	httpClient http.Client
 	cache      map[string][]byte
 }
 
-func NewPokeapiClient() *pokeapiClient {
-	return &pokeapiClient{
+func NewPokeApiClient() *PokeApiClient {
+	return &PokeApiClient{
 		httpClient: http.Client{
-			Timeout: 10 * time.Second,
+		Timeout: 10 * time.Second,
 		},
 		cache: make(map[string][]byte),
 	}
 }
 
-func (c *pokeapiClient) GetLocationAreas(locationURL string) (LocationAreaResp, error) {
+func (c *PokeApiClient) GetLocationAreas(locationURL string) (LocationAreaResp, error) {
 	resp, err := c.httpClient.Get(locationURL)
 	if err != nil {
 		return LocationAreaResp{}, err
