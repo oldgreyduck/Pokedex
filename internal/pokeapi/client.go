@@ -13,7 +13,8 @@ type pokeapiClient struct {
 func NewpokeapiClient() *pokeapiClient {
     return &pokeapiClient{
         httpClient:  http.Client{
+	    Timeout: 10 * time.Second,
 },
-        cache: map[string][]byte,
+	cache: make(map[string][]byte),
 }
 }
