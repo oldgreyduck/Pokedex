@@ -30,7 +30,7 @@ func (c *PokeApiClient) GetLocationAreas(locationURL string) (LocationAreaResp, 
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-i		return LocationAreaResp{}, err
+		return LocationAreaResp{}, err
 	}
 
 	var locationArea LocationAreaResp

@@ -5,17 +5,20 @@ import (
 	  "os"
 	  "bufio"
 	  "strings"
-    "root/Pokedex/internal/pokeapi"
+    	  "pokedex/internal/pokeapi"
 )
+
+var commands map[string]cliCommand
+
 
 func main() {
 	  scanner:= bufio.NewScanner(os.Stdin)
-    commands := map[string]cliCommand{
+    commands = map[string]cliCommand{
     "exit": {name: "exit", description: "Exit the Pokedex", callback: commandExit},
     "help": {name: "help", description: "Displays a help message", callback: commandHelp},
-    "map": {name: "map", description: "Displays a map location", callback: commandMap},
-    "mapb": {name: "mapb", description: "Displays the previous map location", callback: commandMapb} 
-    }
+    "map": {name: "map", description: "Displays map locations", callback: commandMap},
+    "mapb": {name: "mapb", description: "Displays the previous map locations", callback: commandMapb}}
+
     config := Config{
         Client:    pokeapi.NewPokeApiClient(),
         Next:      "https://pokeapi.co/api/v2/location-area/",
@@ -33,7 +36,7 @@ func main() {
         }
         name := userCommand[0]
         if cmd, ok := commands[name]; ok {
-            if err := cmd.callback(config); err != nil {
+            if err := cmd.callback(&config); err != nil {
                 fmt.Println(err)
             }
         } else {

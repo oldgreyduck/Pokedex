@@ -7,7 +7,7 @@ func commandMapb(c *Config) error {
             fmt.Println("you're on the first page")
             return nil
     }
-    res, err := c.Client.GetLocationAreas(c.Previous)
+    res, err := c.Client.GetLocationAreas(*c.Previous)
         if err != nil {
             return err
         }
