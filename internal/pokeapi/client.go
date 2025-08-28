@@ -5,23 +5,33 @@ import (
 	"io"
 	"net/http"
 	"time"
+  "pokedex/internal/pokecache"
 )
 
 type PokeApiClient struct {
 	httpClient http.Client
-	cache      map[string][]byte
+	cache      pokecache.Cache
 }
 
-func NewPokeApiClient() *PokeApiClient {
+func NewPokeApiClient(cacheInterval time.Duration) *PokeApiClient {
 	return &PokeApiClient{
 		httpClient: http.Client{
 		Timeout: 10 * time.Second,
 		},
-		cache: make(map[string][]byte),
+		cache: pokecache.NewCache(cacheInterval),
 	}
 }
 
 func (c *PokeApiClient) GetLocationAreas(locationURL string) (LocationAreaResp, error) {
+  if cachedData, found := c.cache.Get(locationURL); found {
+    var locationArea LocationAreaResp
+    err := json.Unmarshal(cachedData, &locationArea)
+    if err != nil {
+        return LocationAreaResp{}, err
+    }
+    return locationArea, nil
+}
+
 	resp, err := c.httpClient.Get(locationURL)
 	if err != nil {
 		return LocationAreaResp{}, err
@@ -38,6 +48,8 @@ func (c *PokeApiClient) GetLocationAreas(locationURL string) (LocationAreaResp, 
 	if err != nil {
 		return LocationAreaResp{}, err
 	}
+
+c.cache.Add(locationURL, body)
 
 	return locationArea, nil
 }
