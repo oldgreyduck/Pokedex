@@ -10,7 +10,7 @@ import (
 
 type PokeApiClient struct {
 	httpClient http.Client
-	cache      pokecache.Cache
+	cache      *pokecache.Cache
 }
 
 func NewPokeApiClient(cacheInterval time.Duration) *PokeApiClient {

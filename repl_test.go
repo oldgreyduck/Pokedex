@@ -19,7 +19,7 @@ func TestCleanInput(t *testing.T) {
 	    	input:    "Magic The GATHERING",
 	    	expected: []string{"magic", "the", "gathering"},
 		},
-	}
+    }
 		
     for _, c := range cases {
 		actual := cleanInput(c.input)
@@ -33,7 +33,6 @@ func TestCleanInput(t *testing.T) {
 	    	t.Errorf("For input '%s' at index %d: expected %v, got %v", c.input, i, expectedWord, word)
     	}
 	}
-}
+    }
 }
 
-}

@@ -5,7 +5,8 @@ import (
 	  "os"
 	  "bufio"
 	  "strings"
-    "pokedex/internal/pokeapi"
+	  "time"
+	  "pokedex/internal/pokeapi"
 )
 
 var commands map[string]cliCommand
