@@ -29,12 +29,14 @@ func main() {
     rand.Seed(time.Now().UnixNano())
     scanner:= bufio.NewScanner(os.Stdin)
     commands = map[string]cliCommand{
-    "exit": {name: "exit", description: "Exit the Pokedex", callback: commandExit},
+    "exit": {name: "exit", description: "Exits the Pokedex", callback: commandExit},
     "help": {name: "help", description: "Displays a help message", callback: commandHelp},
     "map": {name: "map", description: "Displays map locations", callback: commandMap},
     "mapb": {name: "mapb", description: "Displays the previous map locations", callback: commandMapb},
-    "explore": {name: "explore", description: "Explore a location area", callback: commandExplore},
-    "catch": {name: "catch", description: "Attempt to catch a Pokemon", callback: commandCatch},
+    "explore": {name: "explore", description: "Explores a location area", callback: commandExplore},
+    "catch": {name: "catch", description: "Attempts to catch a Pokemon", callback: commandCatch},
+    "pokedex": {name: "pokedex", description: "Displays all Pokemon in your Pokedex", callback: commandPokedex},
+    "inspect": {name: "inspect", description: "Provides details of a Pokemon", callback: commandInspect},
     }
 
     config := Config{
